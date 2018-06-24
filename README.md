@@ -1,8 +1,7 @@
 # MO Retail Store
 
 # Introduction:
-RESTFULL services for a checkout counter of an online retail store
-Final invoice details the Localized welcome message, all purchase items, costs, applicable tax and total payable amount
+REST-based services for a checkout counter of an online retail store. The final invoice details the localized welcome message, all purchase items, costs, applicable tax and total payable amount
 
 # Highlights
 - Developed as a SpringBoot Microservice
@@ -13,7 +12,6 @@ Final invoice details the Localized welcome message, all purchase items, costs, 
 - Self sufficient project which can be built, deployed and tested
 
 # REST endpoints
-Following operations can be done on Products
 ## Product
 *  GET /product/all             - List all products
 *  GET /product/{resourceId}    - List a particular product
