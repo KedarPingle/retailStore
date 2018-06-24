@@ -35,3 +35,13 @@ REST-based services for a checkout counter of an online retail store. The final 
   Run : java -jar retailStore-0.0.1-SNAPSHOT.jar
 * Swagger: http://localhost:8080/swagger-ui.html
 * Authentication credential: kedar/password
+
+H2 In-memory DB can be accesses as follows from browser:
+- http://localhost:8080/h2-console/
+- Use JDBC URL: jdbc:h2:mem:testdb
+
+#Pre-loaded data
+
+* Application starts with following pre-loaded data:
+- Three products: Apple Small, Shirt Small, Trouser Small.
+- One full bill: billId=1
