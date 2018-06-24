@@ -14,7 +14,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable().and()
 				.authorizeRequests().antMatchers("/v1/**", "/v2/**", "/swagger-ui/**", "/api-docs/**", "/h2-console/**")
 				.permitAll() // we don't want Sprint to protect these urls
-				.antMatchers("/product/**", "/bill/**").authenticated().and().httpBasic().realmName("mystore").and()
+				.antMatchers("/product/**", "/bill/**", "/purchase/**").authenticated().and().httpBasic().realmName("mystore").and()
 				.csrf().disable();
 	}
 

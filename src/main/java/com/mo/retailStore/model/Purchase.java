@@ -1,34 +1,45 @@
 package com.mo.retailStore.model;
 
 
-
-import java.io.IOException;
-import java.util.List;
-
 public class Purchase {
 
-	private String customerName;
-    private List<Product> products;
+	private String billId;
+    private String productId;
+    private String quantity;
 
     /*
      * Public constructor
      */
     public Purchase() {}
 
-	public String getCustomerName() {
-		return customerName;
+	public Purchase(String billId, String productId, String quantity) {
+    	this.setBillId(billId);
+    	this.setQuantity(quantity);
+    	this.setProductId(productId);
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public String getBillId() {
+		return billId;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public void setBillId(String billId) {
+		this.billId = billId;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 }
 

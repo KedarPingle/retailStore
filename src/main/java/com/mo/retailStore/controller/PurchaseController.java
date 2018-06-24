@@ -1,11 +1,11 @@
 package com.mo.retailStore.controller;
 
 
+import com.mo.retailStore.model.Bill;
 import com.mo.retailStore.model.Invoice;
 import com.mo.retailStore.model.Purchase;
 import com.mo.retailStore.service.BillService;
 import com.mo.retailStore.service.ProductService;
-import com.mo.retailStore.util.LocalizationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,143 +15,64 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Locale;
 
 @RestController
 public class PurchaseController {
 
-	@Autowired
-	private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-	@Autowired
+    @Autowired
     private BillService billService;
 
+    /**
+     * Generate invoice with total amount for bill Id
+     *
+     * @param billId
+     * @return Invoice
+     */
     @RequestMapping(value = "/purchase/invoice/{billId}", method = RequestMethod.GET)
     public @ResponseBody
-    Invoice getProduct(@PathVariable(value="billId") String billId) throws IOException {
+    Invoice generateInvoice(@PathVariable(value = "billId") String billId) {
         return billService.getInvoice(billId);
     }
 
-    @RequestMapping(value = "/purchase/new", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody String newPurchase(@RequestBody Purchase purchase) throws Exception {
-        return billService.newPurchase(purchase);
-    }
-	
-	/*@CrossOrigin
-	@RequestMapping(value = "/segment/{resourceId}", method = RequestMethod.GET)
-    public @ResponseBody Segment getSegment(@PathVariable(value="resourceId") String resourceId) throws IOException {
-        return segmentService.getSegment(resourceId);
-    }
-	
-	@RequestMapping(value = "/segment/add", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody String addSegment(@RequestBody Segment segment) throws JsonProcessingException {
-		return segmentService.addSegment(segment);
-    }
-	
-	@CrossOrigin
-    @RequestMapping(value = "/segment-exists/{resourceId}", method = RequestMethod.GET)
-    public @ResponseBody Boolean doesSegmentExist(@PathVariable(value="resourceId") String resourceId) throws IOException {
-        return segmentService.doesSegmentExist(resourceId);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/update-segment", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody Boolean updateSegmentsAndTranslationForLocales(@RequestBody Segment segment) throws Exception {
-        return segmentService.updateSegmentsAndTranslationForLocales(segment);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/projects-sharing-segments/{projectId}", method = RequestMethod.GET)
+    /**
+     * Generate a new bill to add new products
+     *
+     * @param bill
+     * @return billId
+     * @throws Exception
+     */
+    @RequestMapping(value = "/purchase/generate_new_bill", consumes = "application/json", method = RequestMethod.POST)
     public @ResponseBody
-    Set<String> getProjectsSharingSegments(@PathVariable(value="projectId") String projectId) throws Exception {
-        return segmentService.getProjectsSharingSegments(projectId);
+    String generateNewBill(@RequestBody Bill bill) throws Exception {
+        return billService.generateNewBill(bill);
     }
 
-    @CrossOrigin
-    @RequestMapping(value = "/segments-translatability-by-project", consumes = "application/json", method = RequestMethod.POST)
+    /**
+     * Add a product to bill
+     *
+     * @param purchase
+     * @return billId
+     * @throws Exception
+     */
+    @RequestMapping(value = "/purchase/add_scanned_product", consumes = "application/json", method = RequestMethod.POST)
     public @ResponseBody
-    List<Segment> getSegmentsWithTranslatabilityStatusForProjects(@RequestBody SegmentTranslatability segment) throws Exception {
-        return segmentService.getSegmentsWithTranslatabilityStatusForProjects(segment);
+    String addScannedProduct(@RequestBody Purchase purchase) throws Exception {
+        return billService.addScannedProduct(purchase);
     }
 
-    @CrossOrigin
-    @RequestMapping(value = "/assign-segment-translatability-to", consumes = "application/json", method = RequestMethod.POST)
+    /**
+     * Remove a product from bill
+     *
+     * @param purchase
+     * @return billId
+     * @throws Exception
+     */
+    @RequestMapping(value = "/purchase/remove_scanned_product", consumes = "application/json", method = RequestMethod.POST)
     public @ResponseBody
-    Boolean assignSegmentTranslatabilityToUser(@RequestBody SegmentTranslatability segment) throws Exception {
-        return segmentService.assignSegmentTranslatabilityToUser(segment);
+    String removeScannedProduct(@RequestBody Purchase purchase) throws Exception {
+        return billService.removeScannedProduct(purchase);
     }
-
-    @CrossOrigin
-    @RequestMapping(value = "/all-segments-translatability-by-project", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody
-    List<Segment> getAllSegmentsForProjects(@RequestBody SegmentTranslatability segment) throws Exception {
-        return segmentService.getAllSegmentsForProjects(segment);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/user-assigned-segments-by-project", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody
-    List<Segment> getUserAssignedSegmentsForProjects(@RequestBody SegmentTranslatability segment) throws Exception {
-        return segmentService.getUserAssignedSegmentsForProjects(segment);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/segment-with-segmentquality/{resourceId}", method = RequestMethod.GET)
-    public @ResponseBody Segment getSegmentWithSegmentQuality(@PathVariable(value="resourceId") String resourceId) throws IOException {
-        return segmentService.getSegmentWithSegmentQuality(resourceId);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "review-segment-update", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody
-    Boolean reviewSegmentUpdate(@RequestBody SegmentQualityReview segmentQualityReview) throws Exception {
-        return segmentService.reviewSegmentUpdate(segmentQualityReview);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "project-segment-update", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody
-    String projectSegmentUpdate(@RequestBody ProjectSegmentsHolder projectSegmentsHolder) throws Exception {
-        return segmentProjectService.projectSegmentUpdate(projectSegmentsHolder);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/segments-translatability-status-count-project", consumes = "application/json", method = RequestMethod.POST)
-    public @ResponseBody
-    List<ProjectSegmentsTranslationStatus> getSegmentsTranslatabilityStatusCountForProjects(@RequestBody SegmentTranslatability segment) throws Exception {
-        return segmentService.getSegmentsCountForProjects(segment);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/all-removed-segments", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Segment> getAllRemovedSegments() throws IOException {
-        return segmentService.getAllRemovedSegments();
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/segment/staged/count", method = RequestMethod.GET)
-    public @ResponseBody int getCountOfAllStagedSegments() throws IOException {
-
-        return segmentProjectService.getCountOfAllSegmentsByStatus("STAGED");
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/segment-translation/staged", method = RequestMethod.GET)
-    public @ResponseBody Iterable<SegmentTranslation> getAllStagedSegments() throws IOException {
-        return segmentProjectService.getAllSegmentTranslationsByStatus("STAGED");
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/segments-pagination", method = RequestMethod.GET)
-    public @ResponseBody
-    Iterable<Segment> getAllSegmentsByPagination(Pageable pageable) throws IOException {
-        return segmentService.getAllSegmentsByPagination(pageable);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/segments-count", method = RequestMethod.GET)
-    public @ResponseBody
-    Long getAllSegmentsCount() throws IOException {
-        return segmentService.getAllSegmentsCount();
-    }*/
 }

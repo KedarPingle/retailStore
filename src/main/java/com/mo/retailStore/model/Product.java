@@ -15,7 +15,7 @@ public class Product {
 	private CategoryNameEnum categoryName;
 	private long version;
     /**
-     * Get a segment based a segment entity
+     * Get a Product
      *
      * @param productEntity
      * @return

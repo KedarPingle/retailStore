@@ -47,14 +47,14 @@ public class BillProductRepositoryTest {
         billProductId.setProductEntity(productEntity);
         BillProductEntity billProductEntity = new BillProductEntity();
         billProductEntity.setBillProductId(billProductId);
-        billProductEntity.setQuantity(5l);
+        billProductEntity.setQuantity("5");
 
         BillProductId billProductId2 = new BillProductId();
         billProductId2.setBillEntity(billEntity);
         billProductId2.setProductEntity(productEntity2);
         BillProductEntity billProductEntity2 = new BillProductEntity();
         billProductEntity2.setBillProductId(billProductId2);
-        billProductEntity2.setQuantity(5l);
+        billProductEntity2.setQuantity("5");
 
 
 

@@ -14,7 +14,7 @@ public class BillProductEntity {
 	private BillProductId billProductId;
 
 	@Column(name = "quantity")
-	private Long quantity;
+	private String quantity;
 
 	@Column(name = "total_cost")
 	private Double totalCost;
@@ -32,11 +32,11 @@ public class BillProductEntity {
 		this.billProductId = billProductId;
 	}
 
-	public Long getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Long quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 

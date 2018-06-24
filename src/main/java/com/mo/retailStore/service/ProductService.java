@@ -41,7 +41,7 @@ public class ProductService {
         return Product.getProduct(productEntity);
     }
 
-    public Iterable<Product> getAllProducts() throws IOException {
+    public Iterable<Product> getAllProducts() {
         List<Product> products = new ArrayList<Product>();
         for (ProductEntity productEntity : productRepository.findAll()) {
             products.add(Product.getProduct(productEntity));
@@ -49,7 +49,7 @@ public class ProductService {
         return products;
     }
 
-    public Product getProduct(String resourceId) throws IOException {
+    public Product getProduct(String resourceId) {
         ProductEntity productEntity = productRepository.findOne(Long.parseLong(resourceId));
         if (productEntity == null) {
             return null;

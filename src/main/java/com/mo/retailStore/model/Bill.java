@@ -16,7 +16,7 @@ public class Bill {
 
 
     /**
-     * Get a segment based a segment entity
+     * Get a Bill
      *
      * @param billEntity
      * @return
@@ -32,7 +32,7 @@ public class Bill {
     }
 
 	/**
-	 * Get a segment based a segment entity
+	 * Get a bill entity
 	 *
 	 * @param bill
 	 * @return

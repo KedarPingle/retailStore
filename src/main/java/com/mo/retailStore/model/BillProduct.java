@@ -10,14 +10,14 @@ import java.io.IOException;
 public class BillProduct {
 
 	private String productName;
-    private Long productQuantity;
+    private String productQuantity;
     private Double itemCost;
+	private Double itemTotalCost;
     private String tax;
     private Double taxAmount;
-	private Double itemTotalCost;
 
 	/**
-     * Get a segment based a segment entity
+     * Get a BillProduct
      *
      * @param billProductEntity
      * @return
@@ -47,11 +47,11 @@ public class BillProduct {
 		this.productName = productName;
 	}
 
-	public Long getProductQuantity() {
+	public String getProductQuantity() {
 		return productQuantity;
 	}
 
-	public void setProductQuantity(Long productQuantity) {
+	public void setProductQuantity(String productQuantity) {
 		this.productQuantity = productQuantity;
 	}
 

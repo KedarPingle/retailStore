@@ -1,9 +1,9 @@
 package com.mo.retailStore;
 
 import com.mo.retailStore.model.Bill;
-import com.mo.retailStore.model.CategoryEntity;
 import com.mo.retailStore.model.CategoryNameEnum;
 import com.mo.retailStore.model.Product;
+import com.mo.retailStore.model.Purchase;
 import com.mo.retailStore.service.BillService;
 import com.mo.retailStore.service.CategoryService;
 import com.mo.retailStore.service.ProductService;
@@ -71,17 +71,18 @@ public class SampleDataConfiguration {
     private void addBills() throws Exception {
         Bill bill = new Bill();
         bill.setCustomerName("AUser1");
-        billService.addBill(bill);
+        billService.generateNewBill(bill);
 
         bill = new Bill();
         bill.setCustomerName("AUser2");
-        billService.addBill(bill);
+        billService.generateNewBill(bill);
     }
 
     private void addProductsToBill() throws Exception {
-       billService.addProductToBill(1, 1, 5);
-       billService.addProductToBill(1, 2, 2);
-       billService.addProductToBill(1, 3, 2);
+
+       billService.addScannedProduct(new Purchase("1", "1", "5"));
+       billService.addScannedProduct(new Purchase("1", "2", "2"));
+       billService.addScannedProduct(new Purchase("1", "3", "2"));
     }
 
 }
