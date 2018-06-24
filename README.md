@@ -40,7 +40,7 @@ H2 In-memory DB can be accesses as follows from browser:
 - http://localhost:8080/h2-console/
 - Use JDBC URL: jdbc:h2:mem:testdb
 
-#Pre-loaded data
+# Pre-loaded data
 
 * Application starts with following pre-loaded data:
 - Three products: Apple Small, Shirt Small, Trouser Small.
