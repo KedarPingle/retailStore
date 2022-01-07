@@ -1,6 +1,8 @@
 # MO Retail Store
 
 
+
+
 # Introduction:
 REST-based services for a checkout counter of an online retail store. The final invoice details the localized welcome message, all purchase items, costs, applicable tax and total payable amount
 
